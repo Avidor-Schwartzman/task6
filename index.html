@@ -1,0 +1,71 @@
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <title>Country Origin Finder</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.0.0/fetch.min.js"></script>
+</head>
+
+<body>
+    <h1>Country Origin Finder</h1>
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <button onclick="fetchCountryData()">Get Country Origin</button>
+    <div id="result"></div>
+
+    <script>
+        async function fetchCountryData() {
+            const name = document.getElementById('nameInput').value;
+
+            try {
+                const nameResponse = await fetch(`https://api.nationalize.io/?name=${name}`);
+                const nameData = await nameResponse.json();
+
+                if (!nameData || !nameData.country || nameData.country.length === 0) {
+                    document.getElementById('result').innerText = 'No country data found for this name.';
+                    return;
+                }
+
+                const highestProbabilityCountry = nameData.country.reduce((prev, current) => {
+                    return (prev.probability > current.probability) ? prev : current
+                });
+
+                const countryResponse = await fetch(`https://restcountries.com/v3.1/alpha/${highestProbabilityCountry.country_id}`);
+                const countryData = await countryResponse.json();
+
+                if (!countryData || countryData.length === 0) {
+                    document.getElementById('result').innerText = 'No data found for this country.';
+                    return;
+                }
+
+                document.getElementById('result').innerText = `Name: ${name}, Country: ${countryData[0].name.common}, Probability: ${highestProbabilityCountry.probability}`;
+            } catch (error) {
+                console.error(`Error: ${error}`);
+            }
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Country Origin Finder</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.0.0/fetch.min.js"></script>
+</head>
+
+<body>
+    <h1>Country Origin Finder</h1>
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <br>
+    
+    <button onclick="fetchCountryData()">Get Country Origin</button>
+    <div id="result"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>
